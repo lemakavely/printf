@@ -1,52 +1,47 @@
 #include "main.h"
-#include <stdarg.h>
-#include <stdio.h>
-
+#include <unistd.h>
 /**
- *_printf - to print
- *@format: input;
- * Return: Always 0
+ * _printf - Emulate the original.
+ *
+ * @format: Format by specifier.
+ *
+ * Return: count of chars.
  */
-
 int _printf(const char *format, ...)
 {
-	int count = 0;
-	int i = 0;
+	int i = 0, count = 0, count_fun;
+	va_list args;
 
-	va_list data;
-
-	va_start(data, format);
-
-	for (i = 0; format[i] != '\0';)
+	va_start(args, format);
+	if (!format || (format[0] == '%' && !format[1]))
+		return (-1);
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+	while (format[i])
 	{
-		if (format[i] != '%')
+		count_fun = 0;
+		if (format[i] == '%')
 		{
-			count += _putchar(format[i]);
+			if (!format[i + 1] || (format[i + 1] == ' ' && !format[i + 2]))
+			{
+				count = -1;
+				break;
+			}
+			count_fun += get_function(format[i + 1], args);
+			if (count_fun == 0)
+				count += _putchar(format[i + 1]);
+			if (count_fun == -1)
+				count = -1;
 			i++;
 		}
-		else if (format[i] == '%' && format[i + 1] != ' ')
+		else
 		{
-			switch (format[i + 1])
-			{
-				case 'c':
-					count = count + _putchar(va_arg(data, int));
-					break;
-				case 's':
-					count += print_string(va_arg(data, char *));
-					break;
-				case '%':
-					count = count + _putchar('%');
-					break;
-				case 'd':
-					count += print_decimal(va_arg(data, int));
-					break;
-				default:
-					break;
-			}
-			i += 2;
+			(count == -1) ? (_putchar(format[i])) : (count += _putchar(format[i]));
 		}
+		i++;
+		if (count != -1)
+			count += count_fun;
 	}
-
+	va_end(args);
 	return (count);
-
 }
