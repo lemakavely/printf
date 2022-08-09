@@ -1,5 +1,4 @@
 #include "main.h"
-#include <math.h>
 
 /**
  * print_unsgnd_int - prints unsigned int
@@ -12,11 +11,11 @@ int print_unsgnd_int(va_list args)
 {
 	unsigned int k = 0, i = 0, m = 0, p = 1000000000;
 	unsigned int l[10];
-	int count;
+	int count = 0;
 
 	m = va_arg(args, unsigned int);
 	l[0] = m / p;
-	for (i = 0; i < 10;i++)
+	for (i = 0; i < 10; i++)
 	{
 		if (l[0] && i == 0)
 		{
