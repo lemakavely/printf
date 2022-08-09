@@ -2,9 +2,9 @@
 
 /**
  * print_unsgnd_int - prints unsigned int
- * @arg: to print
+ * @args: to print
  *
- * Return: numbeer of printed digits
+ * Return: number of printed digits
  */
 
 int print_unsgnd_int(va_list args)
@@ -24,7 +24,7 @@ int print_unsgnd_int(va_list args)
 			i++;
 			k += l[0];
 		}
-		p = p / 10;
+		p /= 10;
 		l[i] = (m / p) % 10;
 		k += l[i];
 		if (k)
@@ -32,6 +32,32 @@ int print_unsgnd_int(va_list args)
 			_putchar(l[i] + '0');
 			count++;
 		}
+	}
+	return (count);
+}
+
+/**
+ * print_unsgnd_binary - print unsigned in binary
+ * @args: value to be printed
+ *
+ * Return: number of digits printed
+ */
+
+int print_unsgnd_binary(va_list args)
+{
+	unsigned int k = 0;
+	int count = 0, l[32], m = 0;
+
+	k = va_arg(args, unsigned int);
+	for (m = 0; k; m++)
+	{
+		l[m] = k % 2;
+		k /= 2;
+	}
+	for (m = m - 1; m >= 0; m--)
+	{
+		_putchar(l[m] + '0');
+		count++;
 	}
 	return (count);
 }

@@ -30,5 +30,6 @@ int print_digit(va_list args);
 int print_mod(va_list args);
 int print_rev_string(va_list args);
 int print_unsgnd_int(va_list args);
+int print_unsgnd_binary(va_list args);
 
 #endif
