@@ -23,6 +23,9 @@ int get_function(char con_spec, va_list args)
 		{'r', print_rev_string},
 		{'u', print_unsgnd_int},
 		{'b', print_unsgnd_binary},
+		{'o', print_unsgnd_octal},
+		{'x', print_unsgnd_hex},
+		{'X', print_unsgnd_heX},
 		{0, NULL}
 	};
 
