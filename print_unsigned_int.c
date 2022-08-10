@@ -89,7 +89,7 @@ int print_unsgnd_binary(va_list args)
 }
 
 /**
- * print_unsgn_hex - prints unsigned int in base 16
+ * print_unsgnd_hex - prints unsigned int in base 16
  * @args: argument to print
  *
  * Return: number of printed digits
